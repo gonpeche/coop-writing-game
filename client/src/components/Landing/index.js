@@ -4,19 +4,11 @@ import "./index.scss";
 
 function Landing() {
   const [userName, setUsername] = useState("");
-  const [servidor, setServidor] = useState("");
   const dispatch = useDispatch();
-  const callApi = async () => {
-    const response = await fetch("/api/hello");
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    setServidor(body.express);
-  };
 
   return (
     <div>
       <h1>hola k ace!?</h1>
-      <p>RESPUESTA: {servidor}</p>
       <h3>
         komo t yamas?
         <input
@@ -27,8 +19,7 @@ function Landing() {
       </h3>
       <button
         onClick={() => {
-          callApi();
-          // dispatch({ type: "set_username", userName });
+          dispatch({ type: "set_username", userName });
         }}
       >
         A JUGAR
