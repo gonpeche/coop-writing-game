@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.scss";
+import Chatbox from "./Chatbox";
 
 function Gameboard() {
   return (
@@ -8,7 +9,9 @@ function Gameboard() {
       <content className="content">
         <div className="online">ONLINE</div>
         <div className="gameboard">GAMEBOARD</div>
-        <div className="chat">CHAT</div>
+        <div className="chat">
+          <Chatbox />
+        </div>
       </content>
     </div>
   );
