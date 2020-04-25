@@ -1,0 +1,35 @@
+.gameboard-container {
+  border: 1px solid red;
+  min-width: 90vw;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  .header {
+    border: 1px solid green;
+    min-height: 20%;
+    background-color: rgb(120, 120, 202);
+  }
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    min-height: 80%;
+    .online {
+      flex-grow: 1;
+      min-width: 20%;
+      background-color: black;
+    }
+    .gameboard {
+      flex-grow: 2;
+      min-width: 60%;
+      border: 1px solid yellow;
+      background-color: red;
+    }
+    .chat {
+      flex-grow: 1;
+      min-width: 20%;
+      background-color: black;
+    }
+  }
+}
