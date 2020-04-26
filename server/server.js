@@ -13,17 +13,10 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 io.on("connection", (socket) => {
-  // socket.on("join", ({ userName }) => {
-  //   console.log("se conecto: ", userName);
-  // });
-  // socket.on("disconnect", () => {
-  //   console.log("alguien se fue ):");
-  // });
-
   socket.on("join", ({ userName }, callback) => {
     const { error, user } = addUser({ id: socket.id, userName });
 
-    if (error) return callback(error);
+    if (error) throw new Error(error);
 
     socket.emit("message", {
       user: "admin",
@@ -33,21 +26,17 @@ io.on("connection", (socket) => {
       user: "admin",
       text: `${user.userName} has joined!`,
     });
-
-    callback();
   });
 
   socket.on("sendMessage", (message, callback) => {
     const user = getUser(socket.id);
-
+    console.log("sendMessage", user, message);
     io.emit("message", { user: user.userName, text: message });
-
     callback();
   });
 
   socket.on("disconnect", () => {
     const user = removeUser(socket.id);
-
     if (user) {
       io.emit("message", { user: "Admin", text: `${user.userName} has left.` });
     }

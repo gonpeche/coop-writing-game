@@ -15,6 +15,11 @@ function Landing() {
           type="text"
           value={userName}
           onChange={(event) => setUsername(event.target.value)}
+          onKeyPress={(event) =>
+            event.key === "Enter"
+              ? dispatch({ type: "set_username", userName })
+              : null
+          }
         ></input>
       </h3>
       <button
