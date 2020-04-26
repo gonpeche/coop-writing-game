@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-// import queryString from "querystring";
 import io from "socket.io-client";
 import "./index.scss";
 
@@ -10,7 +9,6 @@ let socket;
 
 const Chatbox = () => {
   const userName = useSelector((state) => state.userName);
-  const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   useEffect(() => {
@@ -26,10 +24,6 @@ const Chatbox = () => {
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
     });
-
-    // socket.on("roomData", ({ users }) => {
-    //   setUsers(users);
-    // });
   }, []);
 
   const sendMessage = (event) => {
@@ -40,11 +34,15 @@ const Chatbox = () => {
     }
   };
 
-  console.log(messages);
-
   return (
     <div className="chatbox-container">
-      <div className="chatbox"></div>
+      <div className="chatbox">
+        <ul>
+          {messages.map((message) => {
+            return <li>{message.text}</li>;
+          })}
+        </ul>
+      </div>
       <div className="textbox">
         <form
           onSubmit={(event) => {
