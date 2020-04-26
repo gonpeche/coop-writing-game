@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import "./index.scss";
 
-function Landing() {
-  const [userName, setUsername] = useState("");
+function Landing({ socket }) {
+  const [name, setName] = useState("");
   const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    socket.emit("join", { name }, (user) => {
+      dispatch({ type: "add_user", name: user.name, id: user.id });
+    });
+  };
 
   return (
     <div>
@@ -13,22 +19,14 @@ function Landing() {
         komo t yamas?
         <input
           type="text"
-          value={userName}
-          onChange={(event) => setUsername(event.target.value)}
+          value={name}
+          onChange={(event) => setName(event.target.value)}
           onKeyPress={(event) =>
-            event.key === "Enter"
-              ? dispatch({ type: "set_username", userName })
-              : null
+            event.key === "Enter" ? handleSubmit() : null
           }
         ></input>
       </h3>
-      <button
-        onClick={() => {
-          dispatch({ type: "set_username", userName });
-        }}
-      >
-        A JUGAR
-      </button>
+      <button onClick={handleSubmit}>A JUGAR</button>
     </div>
   );
 }

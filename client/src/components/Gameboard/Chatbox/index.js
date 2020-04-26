@@ -1,29 +1,15 @@
-/* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import io from "socket.io-client";
 import "./index.scss";
 
-const ENDPOINT = "localhost:5000";
-let socket;
-
-const Chatbox = () => {
-  const userName = useSelector((state) => state.userName);
+const Chatbox = ({ socket }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  useEffect(() => {
-    socket = io(ENDPOINT);
-    socket.emit("join", { userName });
-    return () => {
-      socket.emit("disconnect");
-      socket.off();
-    };
-  }, [userName]);
 
   useEffect(() => {
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
     });
+    // eslint-disable-next-line
   }, []);
 
   const sendMessage = (event) => {

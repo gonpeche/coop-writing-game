@@ -1,9 +1,9 @@
-export const initialState = { userName: "" };
+export const initialState = { name: "", id: "" };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "set_username":
-      return { userName: action.userName };
+    case "add_user":
+      return { name: action.name, id: action.id };
     default:
       return state;
   }

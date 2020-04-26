@@ -13,32 +13,33 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 io.on("connection", (socket) => {
-  socket.on("join", ({ userName }, callback) => {
-    const { error, user } = addUser({ id: socket.id, userName });
+  socket.on("join", ({ name }, callback) => {
+    const { error, user } = addUser({ id: socket.id, name });
 
     if (error) throw new Error(error);
 
     socket.emit("message", {
       user: "admin",
-      text: `${user.userName}, welcome to the game.`,
+      text: `${user.name}, welcome to the game.`,
     });
     socket.broadcast.emit("message", {
       user: "admin",
-      text: `${user.userName} has joined!`,
+      text: `${user.name} has joined!`,
     });
+
+    callback(user);
   });
 
   socket.on("sendMessage", (message, callback) => {
     const user = getUser(socket.id);
-    console.log("sendMessage", user, message);
-    io.emit("message", { user: user.userName, text: message });
+    io.emit("message", { user: user.name, text: message });
     callback();
   });
 
   socket.on("disconnect", () => {
     const user = removeUser(socket.id);
     if (user) {
-      io.emit("message", { user: "Admin", text: `${user.userName} has left.` });
+      io.emit("message", { user: "Admin", text: `${user.name} has left.` });
     }
   });
 });

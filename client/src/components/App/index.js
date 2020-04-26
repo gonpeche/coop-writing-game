@@ -3,12 +3,16 @@ import { useSelector } from "react-redux";
 import Landing from "../Landing";
 import "./index.scss";
 import Gameboard from "../Gameboard";
+import io from "socket.io-client";
+
+const ENDPOINT = "localhost:5000";
+const socket = io(ENDPOINT);
 
 function App() {
-  const userName = useSelector((state) => state.userName);
+  const name = useSelector((state) => state.name);
   return (
     <div className="landing-container" id="snow">
-      {userName ? <Gameboard /> : <Landing />}
+      {name ? <Gameboard socket={socket} /> : <Landing socket={socket} />}
     </div>
   );
 }

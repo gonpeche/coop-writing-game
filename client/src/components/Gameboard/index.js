@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.scss";
 import Chatbox from "./Chatbox";
 
-function Gameboard() {
+function Gameboard({ socket }) {
+  useEffect(() => {
+    return () => {
+      socket.emit("disconnect");
+      socket.off();
+    };
+  }, [socket]);
   return (
     <div className="gameboard-container">
       <header className="header">ACA VAN LOS PUNTAJES</header>
@@ -10,7 +16,7 @@ function Gameboard() {
         <div className="online">ONLINE</div>
         <div className="gameboard">GAMEBOARD</div>
         <div className="chat">
-          <Chatbox />
+          <Chatbox socket={socket} />
         </div>
       </content>
     </div>
