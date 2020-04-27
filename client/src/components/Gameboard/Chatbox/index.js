@@ -23,9 +23,9 @@ const Chatbox = ({ socket }) => {
   return (
     <div className="chatbox-container">
       <div className="chatbox">
-        <ul>
-          {messages.map((message) => {
-            return <li>{message.text}</li>;
+        <ul className="chatbox-messages">
+          {messages.map((message, i) => {
+            return <li key={i}>{message.text}</li>;
           })}
         </ul>
       </div>
@@ -37,6 +37,7 @@ const Chatbox = ({ socket }) => {
         >
           <input
             type="text"
+            value={message}
             onChange={(event) => setMessage(event.target.value)}
             onKeyPress={(event) =>
               event.key === "Enter" ? sendMessage(event) : null
