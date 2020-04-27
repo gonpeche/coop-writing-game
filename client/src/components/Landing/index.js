@@ -4,17 +4,25 @@ import "./index.scss";
 
 function Landing({ socket }) {
   const [name, setName] = useState("");
+  const [errorLogin, setErrorLogin] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    socket.emit("join", { name }, (user) => {
-      dispatch({ type: "add_user", name: user.name, id: user.id });
-    });
+    const callback = (response) => {
+      const { error } = response;
+      if (error) {
+        setErrorLogin(error);
+      }
+      const { name, id } = response;
+      dispatch({ type: "add_user", name, id });
+    };
+    socket.emit("join", { name }, callback);
   };
 
   return (
     <div>
       <h1>hola k ace!?</h1>
+      <h1 style={{ color: "red" }}>{errorLogin}</h1>
       <h3>
         komo t yamas?
         <input

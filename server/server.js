@@ -16,7 +16,7 @@ io.on("connection", (socket) => {
   socket.on("join", ({ name }, callback) => {
     const { error, user } = addUser({ id: socket.id, name });
 
-    if (error) throw new Error(error);
+    if (error) return callback({ error });
 
     socket.emit("message", {
       user: "admin",
