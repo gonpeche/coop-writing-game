@@ -4,7 +4,7 @@ const http = require("http");
 const router = require("./router");
 const cors = require("cors");
 
-const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
+const { addUser, removeUser, getUser, getUsers } = require("./users");
 
 const PORT = process.env.PORT || 5000;
 
@@ -27,7 +27,14 @@ io.on("connection", (socket) => {
       text: `${user.name} has joined!`,
     });
 
-    callback(user);
+    const users = getUsers();
+    const response = {
+      name: user.name,
+      id: user.id,
+      users,
+    };
+
+    callback(response);
   });
 
   socket.on("sendMessage", (message, callback) => {
