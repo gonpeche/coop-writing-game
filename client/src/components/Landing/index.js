@@ -10,11 +10,12 @@ function Landing({ socket }) {
   const handleSubmit = () => {
     const callback = (response) => {
       const { error } = response;
-      if (error) {
-        setErrorLogin(error);
-      }
-      const { name, id } = response;
+      if (error) setErrorLogin(error);
+
+      const { name, id, users } = response;
+      console.log("front", users);
       dispatch({ type: "add_user", name, id });
+      dispatch({ type: "set_active_users", users });
     };
     socket.emit("join", { name }, callback);
   };

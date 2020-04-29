@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./index.scss";
 import Chatbox from "./Chatbox";
 import Mainboard from "./Mainboard";
+import Onlinebox from "./Onlinebox";
 
 function Gameboard({ socket }) {
   useEffect(() => {
@@ -14,7 +15,9 @@ function Gameboard({ socket }) {
     <div className="gameboard-container">
       <header className="header">ACA VAN LOS PUNTAJES</header>
       <content className="content">
-        <div className="online">ONLINE</div>
+        <div className="online">
+          <Onlinebox />
+        </div>
         <div className="gameboard">
           <Mainboard socket={socket} />
         </div>

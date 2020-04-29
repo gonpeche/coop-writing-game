@@ -9,7 +9,7 @@ const ENDPOINT = "localhost:5000";
 const socket = io(ENDPOINT);
 
 function App() {
-  const name = useSelector((state) => state.name);
+  const name = useSelector((state) => state);
   return (
     <div className="landing-container" id="snow">
       {name ? <Gameboard socket={socket} /> : <Landing socket={socket} />}
