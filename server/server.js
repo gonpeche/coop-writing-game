@@ -37,6 +37,11 @@ io.on("connection", (socket) => {
     callback(response);
   });
 
+  socket.on("startGame", () => {
+    console.log("start!");
+    io.emit("letsBegin");
+  });
+
   socket.on("sendMessage", (message, callback) => {
     const user = getUser(socket.id);
     io.emit("message", { user: user.name, text: message });

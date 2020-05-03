@@ -3,6 +3,7 @@ import "./index.scss";
 import Chatbox from "./Chatbox";
 import Mainboard from "./Mainboard";
 import Onlinebox from "./Onlinebox";
+import Scoreboard from "./Scoreboard";
 
 function Gameboard({ socket }) {
   useEffect(() => {
@@ -13,7 +14,9 @@ function Gameboard({ socket }) {
   }, [socket]);
   return (
     <div className="gameboard-container">
-      <header className="header">ACA VAN LOS PUNTAJES</header>
+      <header className="header">
+        <Scoreboard />
+      </header>
       <content className="content">
         <div className="online">
           <Onlinebox />

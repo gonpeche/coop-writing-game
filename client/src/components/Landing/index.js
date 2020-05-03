@@ -13,7 +13,6 @@ function Landing({ socket }) {
       if (error) setErrorLogin(error);
 
       const { name, id, users } = response;
-      console.log("front", users);
       dispatch({ type: "add_user", name, id });
       dispatch({ type: "set_active_users", users });
     };

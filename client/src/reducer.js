@@ -6,6 +6,8 @@ export const initialState = {
     name: "",
     id: "",
   },
+  admin: false,
+  initGame: false,
   id: "",
   users: [],
   score: [],
@@ -17,11 +19,15 @@ export const reducer = produce((draft = initialState, action) => {
     case "add_user":
       draft.user.name = action.name;
       draft.user.id = action.id;
+      if (action.name.toLowerCase() === "gon") {
+        draft.admin = true;
+      }
       return draft;
     case "set_active_users":
       draft.users = action.users;
-    // console.log("reducer", action.users);
-    // draft.users.push(action.users);
-    // console.log("hola", draft.users);
+      return;
+    case "start_game":
+      draft.initGame = true;
+      return;
   }
 });
