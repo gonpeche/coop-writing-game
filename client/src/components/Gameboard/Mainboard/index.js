@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import actions from "../../../actions";
 import { useSelector, useDispatch } from "react-redux";
 import "./index.scss";
 

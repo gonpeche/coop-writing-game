@@ -27,7 +27,7 @@ io.on("connection", (socket) => {
     if (error) return callback({ error });
 
     const users = getUsers();
-    console.log(users);
+
     const response = {
       name: user.name,
       id: user.id,
@@ -49,6 +49,11 @@ io.on("connection", (socket) => {
 
   socket.on("startGame", () => {
     io.emit("start");
+  });
+
+  socket.on("joined", (response) => {
+    const users = getUsers();
+    socket.broadcast.emit("gato", users);
   });
 
   socket.on("sendAnswer", (answer) => {
