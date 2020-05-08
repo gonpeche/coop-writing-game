@@ -2,11 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function Onlinebox() {
-  const onlineUsers = useSelector((state) => state.users);
+  const { users } = useSelector((state) => state);
   return (
     <div>
       <ul>
-        {onlineUsers.map((user, i) => (
+        {users.map((user, i) => (
           <li key={i}>{user.name}</li>
         ))}
       </ul>

@@ -1,24 +1,33 @@
 import React, { useState, useEffect } from "react";
+// import actions from "../../../actions";
 import { useSelector, useDispatch } from "react-redux";
 import "./index.scss";
 
 const Mainboard = ({ socket }) => {
   const dispatch = useDispatch();
-  const { admin, initGame } = useSelector((state) => state);
-  const [answer, setAnswer] = useState("");
-  // const [start, setStart] = useState(false);
+  const { admin, initGame, user } = useSelector((state) => state);
+  const [text, setText] = useState("");
+  const [answers, setAnswer] = useState([]);
+
+  socket.on("start", () => dispatch({ type: "start_game" }));
+  socket.on("text", () => setAnswer(answers));
+
   const submitAnswer = () => {
-    console.log(answer);
+    const answer = {
+      name: user.name,
+      id: socket.id,
+      text,
+    };
+    socket.emit("sendAnswer", answer, () => setText(""));
   };
+
   const handleStartGame = () => {
     socket.emit("startGame");
   };
-  useEffect(() => {
-    socket.on("letsBegin", () => {
-      dispatch({ type: "start_game" });
-    });
-    // eslint-disable-next-line
-  }, [initGame]);
+
+  const handleOnKeyPress = (event) =>
+    event.key === "Enter" ? submitAnswer() : null;
+
   return (
     <div>
       {admin && !initGame && (
@@ -28,8 +37,10 @@ const Mainboard = ({ socket }) => {
         <div>
           <h4>Escribí: </h4>
           <input
-            onChange={(e) => setAnswer(e.target.value)}
+            onChange={(e) => setText(e.target.value)}
             className="input"
+            autoFocus
+            onKeyPress={handleOnKeyPress}
           ></input>
           <button onClick={submitAnswer}>Listo!</button>
         </div>

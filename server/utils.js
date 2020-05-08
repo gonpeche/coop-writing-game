@@ -1,4 +1,5 @@
 const users = [];
+let answers = [];
 
 const addUser = ({ id, name }) => {
   name = name.trim().toLowerCase();
@@ -24,4 +25,18 @@ const getUser = (id) => users.find((user) => user.id === id);
 
 const getUsers = () => users;
 
-module.exports = { addUser, removeUser, getUser, getUsers };
+const addAnswer = (answer) => answers.push(answer);
+
+const getAnswers = () => answers;
+
+const emptyAnswers = () => (answers = []);
+
+module.exports = {
+  addUser,
+  removeUser,
+  getUser,
+  getUsers,
+  addAnswer,
+  getAnswers,
+  emptyAnswers,
+};

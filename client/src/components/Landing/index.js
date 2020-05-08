@@ -27,6 +27,7 @@ function Landing({ socket }) {
         komo t yamas?
         <input
           type="text"
+          autoFocus
           value={name}
           onChange={(event) => setName(event.target.value)}
           onKeyPress={(event) =>

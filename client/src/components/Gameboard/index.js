@@ -15,11 +15,11 @@ function Gameboard({ socket }) {
   return (
     <div className="gameboard-container">
       <header className="header">
-        <Scoreboard />
+        <Scoreboard socket={socket} />
       </header>
       <content className="content">
         <div className="online">
-          <Onlinebox />
+          <Onlinebox socket={socket} />
         </div>
         <div className="gameboard">
           <Mainboard socket={socket} />

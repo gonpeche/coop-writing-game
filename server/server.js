@@ -4,7 +4,15 @@ const http = require("http");
 const router = require("./router");
 const cors = require("cors");
 
-const { addUser, removeUser, getUser, getUsers } = require("./users");
+const {
+  addUser,
+  removeUser,
+  getUser,
+  getUsers,
+  getAnswers,
+  removeAnswers,
+  addAnswer,
+} = require("./utils");
 
 const PORT = process.env.PORT || 5000;
 
@@ -18,6 +26,14 @@ io.on("connection", (socket) => {
 
     if (error) return callback({ error });
 
+    const users = getUsers();
+    console.log(users);
+    const response = {
+      name: user.name,
+      id: user.id,
+      users,
+    };
+
     socket.emit("message", {
       user: "admin",
       text: `${user.name}, welcome to the game.`,
@@ -26,20 +42,19 @@ io.on("connection", (socket) => {
       user: "admin",
       text: `${user.name} has joined!`,
     });
-
-    const users = getUsers();
-    const response = {
-      name: user.name,
-      id: user.id,
-      users,
-    };
+    socket.broadcast.emit("friendsOnline", users);
 
     callback(response);
   });
 
   socket.on("startGame", () => {
-    console.log("start!");
-    io.emit("letsBegin");
+    io.emit("start");
+  });
+
+  socket.on("sendAnswer", (answer) => {
+    addAnswer(answer);
+    const answers = getAnswers();
+    io.emit("text", answers);
   });
 
   socket.on("sendMessage", (message, callback) => {
