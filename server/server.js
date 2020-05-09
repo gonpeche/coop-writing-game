@@ -10,7 +10,7 @@ const {
   getUser,
   getUsers,
   getAnswers,
-  removeAnswers,
+  emptyAnswers,
   addAnswer,
 } = require("./utils");
 
@@ -48,18 +48,32 @@ io.on("connection", (socket) => {
   });
 
   socket.on("startGame", () => {
-    io.emit("start");
+    socket.broadcast.emit("startGame");
+  });
+
+  socket.on("restart", () => {
+    emptyAnswers();
+  });
+
+  socket.on("everyoneAnswered", () => {
+    socket.broadcast.emit("startPicking");
   });
 
   socket.on("joined", (response) => {
     const users = getUsers();
-    socket.broadcast.emit("gato", users);
+    socket.broadcast.emit("getUsers", users);
   });
 
-  socket.on("sendAnswer", (answer) => {
+  socket.on("sendAnswer", (answer, callback) => {
     addAnswer(answer);
     const answers = getAnswers();
-    io.emit("text", answers);
+    const users = getUsers();
+
+    const responsePack = {
+      users,
+      answers,
+    };
+    callback(responsePack);
   });
 
   socket.on("sendMessage", (message, callback) => {

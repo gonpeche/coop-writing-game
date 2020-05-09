@@ -9,9 +9,12 @@ import Scoreboard from "./Scoreboard";
 function Gameboard({ socket }) {
   const dispatch = useDispatch();
 
-  socket.on("gato", (response) =>
+  socket.on("getUsers", (response) =>
     dispatch({ type: "set_active_users", users: response })
   );
+  socket.on("startGame", () => {
+    dispatch({ type: "start_game" });
+  });
 
   useEffect(() => {
     socket.emit("joined", (response) => {
@@ -21,11 +24,20 @@ function Gameboard({ socket }) {
       socket.emit("disconnect");
       socket.off();
     };
+    // eslint-disable-next-line
   }, [socket]);
+
+  const restartGame = () => socket.emit("restart");
+  const startGame = () => {
+    dispatch({ type: "start_game" });
+    socket.emit("startGame");
+  };
 
   return (
     <div className="gameboard-container">
       <header className="header">
+        <button onClick={() => startGame()}>start</button>
+        <button onClick={() => restartGame()}>restart</button>
         <Scoreboard socket={socket} />
       </header>
       <content className="content">
