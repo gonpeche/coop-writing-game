@@ -5,7 +5,8 @@ import "./index.scss";
 import Gameboard from "../Gameboard";
 import io from "socket.io-client";
 
-const ENDPOINT = "localhost:5000";
+const ENDPOINT = "https://garralapala.herokuapp.com/";
+// const ENDPOINT = "localhost:5000";
 const socket = io(ENDPOINT);
 
 function App() {
