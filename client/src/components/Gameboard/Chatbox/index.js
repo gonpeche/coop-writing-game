@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import "./index.scss";
 
 const Chatbox = ({ socket }) => {
+  const { users } = useSelector((state) => state);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -22,6 +24,14 @@ const Chatbox = ({ socket }) => {
 
   return (
     <div className="chatbox-container">
+      <div>
+        <h6>Online:</h6>
+        <ul>
+          {users.map((user, i) => (
+            <li key={i}>{user.name}</li>
+          ))}
+        </ul>
+      </div>
       <div className="chatbox">
         <ul className="chatbox-messages">
           {messages.map((message, i) => {

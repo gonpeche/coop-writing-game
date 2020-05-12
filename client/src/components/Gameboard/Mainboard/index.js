@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputAnswer from "./InputAnswer";
+import ChooseBox from "./ChooseBox";
 
 const Mainboard = ({ socket }) => {
   const [choseAnswers, setChoseAnswers] = useState(false);
@@ -14,7 +15,7 @@ const Mainboard = ({ socket }) => {
       {!choseAnswers ? (
         <InputAnswer socket={socket} handleFinish={handleFinish} />
       ) : (
-        <h1>Hola</h1>
+        <ChooseBox socket={socket} />
       )}
     </div>
   );

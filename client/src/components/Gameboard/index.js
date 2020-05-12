@@ -4,7 +4,7 @@ import "./index.scss";
 import Chatbox from "./Chatbox";
 import Mainboard from "./Mainboard";
 import Onlinebox from "./Onlinebox";
-import Scoreboard from "./Scoreboard";
+import Historia from "./Historia";
 
 function Gameboard({ socket }) {
   const dispatch = useDispatch();
@@ -25,23 +25,22 @@ function Gameboard({ socket }) {
       socket.off();
     };
     // eslint-disable-next-line
-  }, [socket]);
+  }, []);
 
-  const restartGame = () => socket.emit("restart");
   const startGame = () => {
     dispatch({ type: "start_game" });
+    socket.emit("restart");
     socket.emit("startGame");
   };
 
   return (
     <div className="gameboard-container">
       <header className="header">
-        <button onClick={() => startGame()}>start</button>
-        <button onClick={() => restartGame()}>restart</button>
-        <Scoreboard socket={socket} />
+        <Historia socket={socket} />
       </header>
       <content className="content">
         <div className="online">
+          <button onClick={() => startGame()}>start</button>
           <Onlinebox socket={socket} />
         </div>
         <div className="gameboard">

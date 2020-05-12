@@ -1,5 +1,6 @@
 const users = [];
 let answers = [];
+let selections = [];
 
 const addUser = ({ id, name }) => {
   name = name.trim().toLowerCase();
@@ -31,6 +32,12 @@ const getAnswers = () => answers;
 
 const emptyAnswers = () => (answers = []);
 
+const getSelections = () => selections;
+
+const setSelection = (selection) => selections.push(selection);
+
+const emptySelections = () => (selections = []);
+
 module.exports = {
   addUser,
   removeUser,
@@ -39,4 +46,7 @@ module.exports = {
   addAnswer,
   getAnswers,
   emptyAnswers,
+  getSelections,
+  emptySelections,
+  setSelection,
 };

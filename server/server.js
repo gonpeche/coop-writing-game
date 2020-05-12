@@ -12,6 +12,9 @@ const {
   getAnswers,
   emptyAnswers,
   addAnswer,
+  getSelections,
+  emptySelections,
+  setSelection,
 } = require("./utils");
 
 const PORT = process.env.PORT || 5000;
@@ -53,6 +56,20 @@ io.on("connection", (socket) => {
 
   socket.on("restart", () => {
     emptyAnswers();
+    emptySelections();
+  });
+
+  socket.on("getData", () => {
+    const payload = {
+      users: getUsers(),
+      answers: getAnswers(),
+      selections: getSelections(),
+    };
+    io.emit("DATA_FROM_SERVER", payload);
+  });
+
+  socket.on("setSelection", (selection) => {
+    setSelection(selection);
   });
 
   socket.on("everyoneAnswered", () => {
