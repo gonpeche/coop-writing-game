@@ -15,6 +15,9 @@ const {
   getSelections,
   emptySelections,
   setSelection,
+  setWinner,
+  getWinners,
+  emptyWinner,
 } = require("./utils");
 
 const PORT = process.env.PORT || 5000;
@@ -22,6 +25,16 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+
+const sendPayload = () => {
+  const payload = {
+    users: getUsers(),
+    answers: getAnswers(),
+    selections: getSelections(),
+    winners: getWinners(),
+  };
+  return payload;
+};
 
 io.on("connection", (socket) => {
   socket.on("join", ({ name }, callback) => {
@@ -57,15 +70,11 @@ io.on("connection", (socket) => {
   socket.on("restart", () => {
     emptyAnswers();
     emptySelections();
+    emptyWinner();
   });
 
   socket.on("getData", () => {
-    const payload = {
-      users: getUsers(),
-      answers: getAnswers(),
-      selections: getSelections(),
-    };
-    io.emit("DATA_FROM_SERVER", payload);
+    io.emit("DATA_FROM_SERVER", sendPayload());
   });
 
   socket.on("setSelection", (selection) => {
@@ -91,6 +100,11 @@ io.on("connection", (socket) => {
       answers,
     };
     callback(responsePack);
+  });
+
+  socket.on("setWinner", (winner) => {
+    setWinner(winner);
+    io.emit("getWinners", sendPayload());
   });
 
   socket.on("sendMessage", (message, callback) => {

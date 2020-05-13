@@ -1,6 +1,7 @@
 const users = [];
 let answers = [];
 let selections = [];
+let winners = [];
 
 const addUser = ({ id, name }) => {
   name = name.trim().toLowerCase();
@@ -38,6 +39,12 @@ const setSelection = (selection) => selections.push(selection);
 
 const emptySelections = () => (selections = []);
 
+const getWinners = () => winners;
+
+const setWinner = (winner) => winners.push(...winners, winner);
+
+const emptyWinner = () => (winners = []);
+
 module.exports = {
   addUser,
   removeUser,
@@ -49,4 +56,7 @@ module.exports = {
   getSelections,
   emptySelections,
   setSelection,
+  getWinners,
+  setWinner,
+  emptyWinner,
 };

@@ -17,7 +17,7 @@ const ChooseBox = ({ socket }) => {
       if (answers.length === selections.length) {
         setShowResults(true);
         const winner = calculateWinner(selections);
-        console.log("Winner is: ", winner);
+        socket.emit("setWinner", winner);
       }
     });
   }, []);

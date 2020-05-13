@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function Onlinebox({ socket }) {
   const { users } = useSelector((state) => state);
-  const [score, setScore] = useState([]);
+  // const [score, setScore] = useState([]);
 
-  socket.on("DATA_FROM_SERVER", (message) => {
-    const { selections } = message;
-    setScore(selections);
-  });
+  useEffect(() => {
+    socket.on("getWinners", (message) => {
+      const { winners } = message;
+    });
+  }, []);
 
   return (
     <div>
