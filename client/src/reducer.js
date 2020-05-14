@@ -26,6 +26,10 @@ export const reducer = produce((draft = initialState, action) => {
     case "set_active_users":
       draft.users = action.users;
       return;
+    case "set_score":
+      console.log("reducer", action);
+      draft.score.push(action.winner.name);
+      return;
     case "start_game":
       draft.initGame = true;
       return;

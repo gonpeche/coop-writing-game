@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { calculateWinner } from "./utils";
 
 const ChooseBox = ({ socket }) => {
@@ -7,7 +7,8 @@ const ChooseBox = ({ socket }) => {
   const [selected, setSelected] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [done, setDone] = useState(false);
-  const { user } = useSelector((state) => state);
+  const { user, score } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     socket.emit("getData");
@@ -17,7 +18,9 @@ const ChooseBox = ({ socket }) => {
       if (answers.length === selections.length) {
         setShowResults(true);
         const winner = calculateWinner(selections);
-        socket.emit("setWinner", winner);
+        console.log("se encontro el ganador", winner);
+        dispatch({ type: "set_score", winner: winner });
+        // socket.emit("setWinner", winner);
       }
     });
   }, []);
@@ -39,19 +42,19 @@ const ChooseBox = ({ socket }) => {
         <>
           <div>
             {answers.map((answer, i) => {
-              if (answer.name !== user.name) {
-                return (
-                  <div key={i}>
-                    <input
-                      type="radio"
-                      name="drone"
-                      value={answer.text}
-                      onChange={() => handleSelect(answer)}
-                    />
-                    <label>{answer.text}</label>
-                  </div>
-                );
-              }
+              // if (answer.name !== user.name) {
+              return (
+                <div key={i}>
+                  <input
+                    type="radio"
+                    name="drone"
+                    value={answer.text}
+                    onChange={() => handleSelect(answer)}
+                  />
+                  <label>{answer.text}</label>
+                </div>
+              );
+              // }
             })}
           </div>
           <button onClick={() => submitSelection()}>SUBMIT</button>
@@ -64,7 +67,9 @@ const ChooseBox = ({ socket }) => {
 
   return (
     <div>
-      <div>{showResults ? <h2>Vote results: </h2> : choseAnswer()}</div>
+      <div>
+        {showResults ? <h2>GANÓ {score[score.length - 1]} </h2> : choseAnswer()}
+      </div>
     </div>
   );
 };

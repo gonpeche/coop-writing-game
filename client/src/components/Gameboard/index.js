@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import "./index.scss";
 import Chatbox from "./Chatbox";
 import Mainboard from "./Mainboard";
-import Onlinebox from "./Onlinebox";
+import Scoreboard from "./Scoreboard";
 import Historia from "./Historia";
 
 function Gameboard({ socket }) {
@@ -41,7 +41,7 @@ function Gameboard({ socket }) {
       <content className="content">
         <div className="online">
           <button onClick={() => startGame()}>start</button>
-          <Onlinebox socket={socket} />
+          <Scoreboard socket={socket} />
         </div>
         <div className="gameboard">
           <Mainboard socket={socket} />

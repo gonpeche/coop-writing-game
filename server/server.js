@@ -103,8 +103,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("setWinner", (winner) => {
-    setWinner(winner);
-    io.emit("getWinners", sendPayload());
+    // setWinner(winner);
+    // io.emit("getWinners", sendPayload());
+    console.log("ganador: ", winner);
+    io.emit("getWinners", winner);
   });
 
   socket.on("sendMessage", (message, callback) => {
