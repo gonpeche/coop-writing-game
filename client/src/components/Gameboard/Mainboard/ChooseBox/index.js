@@ -1,38 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { calculateWinner } from "./utils";
+// import { calculateMostVoted } from "../utils";
 
-const ChooseBox = ({ socket }) => {
-  const [answers, setAnswers] = useState([]);
+const ChooseBox = ({ socket, nextRound }) => {
+  const { answers, scores, selections, user } = useSelector((state) => state);
   const [selected, setSelected] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [done, setDone] = useState(false);
-  const { user, score } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    socket.emit("getData");
-    socket.on("DATA_FROM_SERVER", (payload) => {
-      const { answers, selections } = payload;
-      setAnswers(answers);
-      if (answers.length === selections.length) {
-        setShowResults(true);
-        const winner = calculateWinner(selections);
-        console.log("se encontro el ganador", winner);
-        dispatch({ type: "set_score", winner: winner });
-        // socket.emit("setWinner", winner);
-      }
+    socket.on("receiveOthersSelections", (selected) => {
+      dispatch({ type: "set_selection", selected });
     });
-  }, []);
+
+    if (scores.length) {
+      // const winners = calculateMostVoted(selections);
+      // console.log(winners);
+      setShowResults(true);
+    }
+  }, [scores, showResults]);
 
   const handleSelect = (e) => {
     setSelected(e);
   };
 
   const submitSelection = () => {
-    socket.emit("setSelection", selected);
     setDone(true);
-    socket.emit("getData");
+    const payload = {
+      text: selected.text,
+      name: selected.name,
+      voter: user.name,
+      id: selected.id,
+    };
+    dispatch({ type: "set_selection", selected: payload });
+    socket.emit("sendSelection", payload);
   };
 
   const choseAnswer = () => (
@@ -42,7 +44,6 @@ const ChooseBox = ({ socket }) => {
         <>
           <div>
             {answers.map((answer, i) => {
-              // if (answer.name !== user.name) {
               return (
                 <div key={i}>
                   <input
@@ -54,7 +55,6 @@ const ChooseBox = ({ socket }) => {
                   <label>{answer.text}</label>
                 </div>
               );
-              // }
             })}
           </div>
           <button onClick={() => submitSelection()}>SUBMIT</button>
@@ -68,7 +68,21 @@ const ChooseBox = ({ socket }) => {
   return (
     <div>
       <div>
-        {showResults ? <h2>GANÓ {score[score.length - 1]} </h2> : choseAnswer()}
+        {showResults ? (
+          <div>
+            <h2>Votados: </h2>
+            {selections.map((selection, i) => {
+              return (
+                <p key={i}>
+                  "{selection.text}" de {selection.name}
+                </p>
+              );
+            })}
+            <button onClick={nextRound}>Continuar</button>
+          </div>
+        ) : (
+          choseAnswer()
+        )}
       </div>
     </div>
   );

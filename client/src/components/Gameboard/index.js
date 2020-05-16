@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./index.scss";
 import Chatbox from "./Chatbox";
 import Mainboard from "./Mainboard";
@@ -8,7 +8,7 @@ import Historia from "./Historia";
 
 function Gameboard({ socket }) {
   const dispatch = useDispatch();
-
+  const { initGame } = useSelector((state) => state);
   socket.on("getUsers", (response) =>
     dispatch({ type: "set_active_users", users: response })
   );
@@ -29,7 +29,6 @@ function Gameboard({ socket }) {
 
   const startGame = () => {
     dispatch({ type: "start_game" });
-    socket.emit("restart");
     socket.emit("startGame");
   };
 

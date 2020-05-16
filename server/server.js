@@ -67,12 +67,6 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("startGame");
   });
 
-  socket.on("restart", () => {
-    emptyAnswers();
-    emptySelections();
-    emptyWinner();
-  });
-
   socket.on("getData", () => {
     io.emit("DATA_FROM_SERVER", sendPayload());
   });
@@ -90,23 +84,16 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("getUsers", users);
   });
 
-  socket.on("sendAnswer", (answer, callback) => {
-    addAnswer(answer);
-    const answers = getAnswers();
-    const users = getUsers();
-
-    const responsePack = {
-      users,
-      answers,
-    };
-    callback(responsePack);
+  socket.on("sendTextAnswer", (answer) => {
+    socket.broadcast.emit("receiveOtherAnswers", answer);
   });
 
-  socket.on("setWinner", (winner) => {
-    // setWinner(winner);
-    // io.emit("getWinners", sendPayload());
-    console.log("ganador: ", winner);
-    io.emit("getWinners", winner);
+  // socket.on("sendWinner", (winner) => {
+  //   socket.broadcast.emit("sendWinnerToOthers", winner);
+  // })
+
+  socket.on("sendSelection", (selection) => {
+    socket.broadcast.emit("receiveOthersSelections", selection);
   });
 
   socket.on("sendMessage", (message, callback) => {

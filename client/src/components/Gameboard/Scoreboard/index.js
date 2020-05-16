@@ -2,20 +2,34 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function Scoreboard({ socket }) {
-  const { users, score } = useSelector((state) => state);
-  // const [score, setScore] = useState([]);
+  const { scores } = useSelector((state) => state);
+  const [scoreBoard, setScoreboard] = useState([]);
 
-  useEffect(() => {}, [score]);
+  useEffect(() => {
+    if (scores.length) {
+      createScoreboard(scores);
+    }
+  }, [scores]);
 
-  console.log("score", score);
+  const createScoreboard = (scores) => {
+    // const board = {};
+    // scores.forEach((score) => {
+    //   if (board[score.name]) {
+    //     board[score.name] += 1;
+    //   } else {
+    //     board[score.name] = 1;
+    //   }
+    // });
+    // setScoreboard([board]);
+  };
+
   return (
     <div>
       Resultados
-      <ul>
-        {score.map((name, i) => (
-          <li key={i}>{name}</li>
-        ))}
-      </ul>
+      {/* <ul>
+        {scoreBoard.length &&
+          scoreBoard.map((score, i) => <li key={i}>{score.name}</li>)}
+      </ul> */}
     </div>
   );
 }
