@@ -67,6 +67,10 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("startGame");
   });
 
+  socket.on("nextRound", () => {
+    socket.broadcast.emit("startNextRound");
+  });
+
   socket.on("getData", () => {
     io.emit("DATA_FROM_SERVER", sendPayload());
   });
@@ -85,12 +89,9 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendTextAnswer", (answer) => {
+    console.log("server", answer);
     socket.broadcast.emit("receiveOtherAnswers", answer);
   });
-
-  // socket.on("sendWinner", (winner) => {
-  //   socket.broadcast.emit("sendWinnerToOthers", winner);
-  // })
 
   socket.on("sendSelection", (selection) => {
     socket.broadcast.emit("receiveOthersSelections", selection);

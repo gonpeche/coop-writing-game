@@ -8,12 +8,6 @@ const InputAnswer = ({ socket }) => {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    socket.on("receiveOtherAnswers", (answer) => {
-      dispatch({ type: "add_answer", answer });
-    });
-  }, []);
-
   const submitAnswer = () => {
     const answer = {
       name: user.name,
@@ -45,7 +39,6 @@ const InputAnswer = ({ socket }) => {
       <span>Listo! esperemos al resto...</span>
     );
   };
-
   return (
     <div>
       {initGame ? (

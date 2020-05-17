@@ -10,6 +10,25 @@ const Mainboard = ({ socket }) => {
   const { users, answers, selections, score } = useSelector((state) => state);
   const dispatch = useDispatch();
 
+  socket.on("startNextRound", () => {
+    dispatch({ type: "next_round" });
+    setChoseAnswers(false);
+  });
+
+  useEffect(() => {
+    socket.on("receiveOthersSelections", (selected) => {
+      dispatch({ type: "set_selection", selected });
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("useEfect");
+    socket.on("receiveOtherAnswers", (answer) => {
+      console.log("dentro funcion useEffect", answer);
+      dispatch({ type: "add_answer", answer });
+    });
+  }, []);
+
   useEffect(() => {
     if (users.length === answers.length && answers.length !== 0) {
       socket.emit("everyoneAnswered");
@@ -26,12 +45,10 @@ const Mainboard = ({ socket }) => {
   socket.on("startPicking", () => setChoseAnswers(true));
 
   const nextRound = () => {
-    // dispatch({ type: "new_round" });
     setChoseAnswers(false);
-    dispatch({ type: "start_game" });
-    socket.emit("startGame");
+    dispatch({ type: "next_round" });
+    socket.emit("nextRound");
   };
-
   return (
     <div>
       {!choseAnswers ? (

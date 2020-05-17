@@ -13,10 +13,6 @@ const ChooseBox = ({ socket, nextRound }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    socket.on("receiveOthersSelections", (selected) => {
-      dispatch({ type: "set_selection", selected });
-    });
-
     if (roundResults?.votes) {
       const checkWinner = calculateRoundResults(selections);
       setResults(checkWinner);
