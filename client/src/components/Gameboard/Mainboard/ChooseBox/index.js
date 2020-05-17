@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { calculateMostVoted } from "../utils";
+import { calculateRoundResults } from "../utils";
 
 const ChooseBox = ({ socket, nextRound }) => {
-  const { answers, scores, selections, user } = useSelector((state) => state);
+  const { answers, roundResults, selections, user } = useSelector(
+    (state) => state
+  );
+  const [results, setResults] = useState([]);
   const [selected, setSelected] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [done, setDone] = useState(false);
@@ -14,12 +17,12 @@ const ChooseBox = ({ socket, nextRound }) => {
       dispatch({ type: "set_selection", selected });
     });
 
-    if (scores.length) {
-      // const winners = calculateMostVoted(selections);
-      // console.log(winners);
+    if (roundResults?.votes) {
+      const checkWinner = calculateRoundResults(selections);
+      setResults(checkWinner);
       setShowResults(true);
     }
-  }, [scores, showResults]);
+  }, [roundResults, showResults]);
 
   const handleSelect = (e) => {
     setSelected(e);
@@ -70,11 +73,18 @@ const ChooseBox = ({ socket, nextRound }) => {
       <div>
         {showResults ? (
           <div>
+            <div>
+              {roundResults.ganador ? (
+                <h1>Ganó {results.ganador.author}!</h1>
+              ) : (
+                <h1>Empate! Suman 1 punto los votados</h1>
+              )}
+            </div>
             <h2>Votados: </h2>
-            {selections.map((selection, i) => {
+            {selections.map((votes, i) => {
               return (
                 <p key={i}>
-                  "{selection.text}" de {selection.name}
+                  {votes.voter} votó a {votes.name} el texto: "{votes.text}".
                 </p>
               );
             })}

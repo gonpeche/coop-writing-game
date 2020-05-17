@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function Scoreboard({ socket }) {
-  const { scores } = useSelector((state) => state);
-  const [scoreBoard, setScoreboard] = useState([]);
+  // const { score } = useSelector((state) => state);
 
-  useEffect(() => {
-    if (scores.length) {
-      createScoreboard(scores);
-    }
-  }, [scores]);
+  // useEffect(() => {
+  //   if (score.length) {
+  //     createScoreboard(scores);
+  //   }
+  // }, [score]);
 
   const createScoreboard = (scores) => {
     // const board = {};

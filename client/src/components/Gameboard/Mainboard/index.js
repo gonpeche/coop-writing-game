@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import InputAnswer from "./InputAnswer";
 import ChooseBox from "./ChooseBox";
-import { calculateWinner } from "./utils";
+import { calculateRoundResults, calculateScore } from "./utils";
+import actions from "../../../actions";
 
 const Mainboard = ({ socket }) => {
   const [choseAnswers, setChoseAnswers] = useState(false);
-  const { users, answers, selections } = useSelector((state) => state);
-  const todo = useSelector((state) => state);
+  const { users, answers, selections, score } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,8 +16,10 @@ const Mainboard = ({ socket }) => {
       setChoseAnswers(true);
     }
     if (selections.length === users.length && selections.length !== 0) {
-      const score = calculateWinner(selections);
-      dispatch({ type: "set_score", score });
+      const roundResults = calculateRoundResults(selections);
+      dispatch({ type: "set_round_results", roundResults });
+      const newScore = calculateScore(roundResults, score);
+      dispatch(actions.updateScore(newScore, score));
     }
   }, [answers, selections]);
 

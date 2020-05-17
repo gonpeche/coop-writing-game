@@ -9,9 +9,10 @@ export const initialState = {
   admin: false,
   initGame: false,
   users: [],
-  scores: [],
+  score: {},
   answers: [],
   selections: [],
+  roundResults: [],
   text: "",
 };
 
@@ -27,8 +28,9 @@ export const reducer = produce((draft = initialState, action) => {
     case "set_active_users":
       draft.users = action.users;
       return;
-    case "set_score":
-      draft.scores.push(action.score);
+    case "update_score":
+      console.log(action);
+      draft.score = action.updatedScore;
       return;
     case "set_selection":
       draft.selections.push(action.selected);
@@ -38,6 +40,9 @@ export const reducer = produce((draft = initialState, action) => {
       return;
     case "add_text":
       draft.text = draft.text + action.text + " ";
+      return;
+    case "set_round_results":
+      draft.roundResults = action.roundResults;
       return;
     case "start_game":
       draft.answers = [];
