@@ -40,6 +40,12 @@ const ChooseBox = ({ socket, nextRound }) => {
     socket.emit("sendSelection", payload);
   };
 
+  const handleContinuar = () => {
+    setShowResults(false);
+    setDone(false);
+    nextRound();
+  };
+
   const choseAnswer = () => (
     <div>
       <h1>Elegí!</h1>
@@ -88,7 +94,7 @@ const ChooseBox = ({ socket, nextRound }) => {
                 </p>
               );
             })}
-            <button onClick={nextRound}>Continuar</button>
+            <button onClick={handleContinuar}>Continuar</button>
           </div>
         ) : (
           choseAnswer()

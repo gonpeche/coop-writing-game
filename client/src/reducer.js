@@ -29,7 +29,6 @@ export const reducer = produce((draft = initialState, action) => {
       draft.users = action.users;
       return;
     case "update_score":
-      console.log(action);
       draft.score = action.updatedScore;
       return;
     case "set_selection":
@@ -48,6 +47,7 @@ export const reducer = produce((draft = initialState, action) => {
       draft.answers = [];
       draft.selections = [];
       draft.initGame = true;
+      draft.roundResults = [];
       return;
   }
 });

@@ -16,7 +16,6 @@ const updateScore = (newScore, actualScore) => {
     }
   } else {
     newScore.votes.forEach((user) => {
-      console.log(user, " - ", updatedScore);
       if (updatedScore[user]) {
         updatedScore[user] += 1;
       } else {
@@ -27,7 +26,7 @@ const updateScore = (newScore, actualScore) => {
 
   return {
     type: "update_score",
-    payload: updatedScore,
+    updatedScore,
   };
 };
 
