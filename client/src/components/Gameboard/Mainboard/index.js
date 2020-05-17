@@ -22,9 +22,7 @@ const Mainboard = ({ socket }) => {
   }, []);
 
   useEffect(() => {
-    console.log("useEfect");
     socket.on("receiveOtherAnswers", (answer) => {
-      console.log("dentro funcion useEffect", answer);
       dispatch({ type: "add_answer", answer });
     });
   }, []);
@@ -38,6 +36,11 @@ const Mainboard = ({ socket }) => {
       const roundResults = calculateRoundResults(selections);
       dispatch({ type: "set_round_results", roundResults });
       const newScore = calculateScore(roundResults, score);
+
+      if (newScore.winnerText) {
+        dispatch({ type: "add_text", text: newScore.winnerText });
+      }
+
       dispatch(actions.updateScore(newScore, score));
     }
   }, [answers, selections]);

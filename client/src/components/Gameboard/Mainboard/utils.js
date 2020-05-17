@@ -65,11 +65,13 @@ export const calculateRoundResults = (selections) => {
 export const calculateScore = (resultsVote) => {
   let response = {
     winner: "",
+    winnerText: "",
     points: 0,
     votes: [],
   };
   if (resultsVote?.ganador) {
     response.winner = resultsVote?.ganador?.author;
+    response.winnerText = resultsVote?.ganador?.text;
     response.points = 5;
 
     return response;

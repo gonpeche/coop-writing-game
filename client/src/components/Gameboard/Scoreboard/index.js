@@ -1,34 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-function Scoreboard({ socket }) {
-  // const { score } = useSelector((state) => state);
+function Scoreboard({}) {
+  const { score, users } = useSelector((state) => state);
+  const [board, setBoard] = useState([]);
 
-  // useEffect(() => {
-  //   if (score.length) {
-  //     createScoreboard(scores);
-  //   }
-  // }, [score]);
+  useEffect(() => {
+    createScoreboard();
+  }, [score]);
 
-  const createScoreboard = (scores) => {
-    // const board = {};
-    // scores.forEach((score) => {
-    //   if (board[score.name]) {
-    //     board[score.name] += 1;
-    //   } else {
-    //     board[score.name] = 1;
-    //   }
-    // });
-    // setScoreboard([board]);
+  const createScoreboard = () => {
+    let updatedBoard = [];
+    users.forEach((user) => {
+      let userData = {};
+      if (score[user.name]) {
+        userData.name = user.name;
+        userData.score = score[user.name];
+        updatedBoard.push(userData);
+      } else {
+        userData.name = user.name;
+        userData.score = 0;
+        updatedBoard.push(userData);
+      }
+    });
+    setBoard(updatedBoard);
+  };
+
+  const renderTableData = () => {
+    return board.map((user, i) => {
+      const { name, score } = user;
+      return (
+        <tr key={i}>
+          <td>{name}</td>
+          <td>{score}</td>
+        </tr>
+      );
+    });
   };
 
   return (
     <div>
-      Resultados
-      {/* <ul>
-        {scoreBoard.length &&
-          scoreBoard.map((score, i) => <li key={i}>{score.name}</li>)}
-      </ul> */}
+      Resultados:
+      <table id="students">
+        <tbody>{renderTableData()}</tbody>
+      </table>
     </div>
   );
 }

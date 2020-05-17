@@ -89,7 +89,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendTextAnswer", (answer) => {
-    console.log("server", answer);
     socket.broadcast.emit("receiveOtherAnswers", answer);
   });
 
