@@ -25,7 +25,7 @@ const Chatbox = ({ socket }) => {
   return (
     <div className="chatbox-container">
       <div>
-        <h6>Online:</h6>
+        <div>Chatea con los participantes!</div>
         <ul>
           {users.map((user, i) => (
             <li key={i}>{user.name}</li>

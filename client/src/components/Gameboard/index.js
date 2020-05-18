@@ -34,21 +34,23 @@ function Gameboard({ socket }) {
 
   return (
     <div className="gameboard-container">
-      <header className="header">
-        <Historia socket={socket} />
-      </header>
-      <content className="content">
-        <div className="online">
-          <button onClick={() => startGame()}>start</button>
-          <Scoreboard socket={socket} />
+      <div className="board-wrapper">
+        <header className="header">
+          <Historia socket={socket} />
+        </header>
+        <div className="content">
+          <div className="scores">
+            <button onClick={() => startGame()}>start</button>
+            <Scoreboard socket={socket} />
+          </div>
+          <div className="gameboard">
+            <Mainboard socket={socket} />
+          </div>
+          <div className="chat">
+            <Chatbox socket={socket} />
+          </div>
         </div>
-        <div className="gameboard">
-          <Mainboard socket={socket} />
-        </div>
-        <div className="chat">
-          <Chatbox socket={socket} />
-        </div>
-      </content>
+      </div>
     </div>
   );
 }

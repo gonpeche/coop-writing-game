@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import "./index.scss";
 
 function Landing({ socket }) {
   const [name, setName] = useState("");
