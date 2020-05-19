@@ -26,23 +26,21 @@ const Chatbox = ({ socket }) => {
     <div className="chatbox-container">
       <div>
         <div>Chatea con los participantes!</div>
-        <ul>
+        <div>
           {users.map((user, i) => (
-            <li key={i}>{user.name}</li>
+            <div key={i}>{user.name}</div>
           ))}
-        </ul>
+        </div>
       </div>
       <div className="chatbox">
-        <ul className="chatbox-messages">
-          {messages.map((message, i) => {
-            return (
-              <li key={i}>
-                <span>{message.user}: </span>
-                {message.text}
-              </li>
-            );
-          })}
-        </ul>
+        {messages.map((message, i) => {
+          return (
+            <div key={i} className="chatbox-messages">
+              <span>{message.user}: </span>
+              {message.text}
+            </div>
+          );
+        })}
       </div>
       <div className="textbox">
         <form

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import "./index.scss";
 
 function Landing({ socket }) {
   const [name, setName] = useState("");
@@ -15,26 +16,26 @@ function Landing({ socket }) {
       dispatch({ type: "add_user", name, id });
       dispatch({ type: "set_active_users", users });
     };
-    socket.emit("join", { name }, callback);
+    if (name) {
+      socket.emit("join", { name }, callback);
+    }
   };
 
   return (
-    <div>
+    <div className="welcome-landing">
       <h1>hola k ace!?</h1>
       <h1 style={{ color: "red" }}>{errorLogin}</h1>
-      <h3>
-        komo t yamas?
-        <input
-          type="text"
-          autoFocus
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          onKeyPress={(event) =>
-            event.key === "Enter" ? handleSubmit() : null
-          }
-        ></input>
-      </h3>
-      <button onClick={handleSubmit}>A JUGAR</button>
+      <h2>komo t yamas?</h2>
+      <input
+        type="text"
+        autoFocus
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+        onKeyPress={(event) => (event.key === "Enter" ? handleSubmit() : null)}
+      ></input>
+      <div className="play-btn">
+        <button onClick={handleSubmit}>A JUGAR</button>
+      </div>
     </div>
   );
 }
