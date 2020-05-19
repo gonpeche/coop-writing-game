@@ -1,5 +1,27 @@
-// .input {
-//   width: 80%;
-//   padding: 10px;
-//   margin-left: 10px;
-// }
+.input-container {
+  margin-left: 5%;
+}
+.input {
+  width: 80%;
+  height: 30px;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 4px;
+}
+
+.ready-btn {
+  margin-top: 30px;
+  height: 40px;
+  font-size: 20px;
+  margin-left: 25%;
+  // margin-left: 200px;
+  width: 200px;
+  cursor: pointer;
+  background-color: rgb(133, 228, 133);
+  color: black;
+}
+
+.ready-btn:hover {
+  background-color: rgb(3, 109, 3);
+  color: white;
+}

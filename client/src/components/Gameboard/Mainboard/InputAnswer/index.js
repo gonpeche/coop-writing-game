@@ -14,9 +14,12 @@ const InputAnswer = ({ socket }) => {
       id: socket.id,
       text,
     };
-    setAnswerSubmitted(true);
-    dispatch({ type: "add_answer", answer });
-    socket.emit("sendTextAnswer", answer);
+
+    if (answer.text) {
+      setAnswerSubmitted(true);
+      dispatch({ type: "add_answer", answer });
+      socket.emit("sendTextAnswer", answer);
+    }
   };
 
   const handleOnKeyPress = (event) =>
@@ -24,16 +27,21 @@ const InputAnswer = ({ socket }) => {
 
   const renderActionPanel = () => {
     return !answerSubmitted ? (
-      <div>
+      <div className="input-container">
         <h4>Escribí: </h4>
         <input
           onChange={(e) => setText(e.target.value)}
           className="input"
           autoFocus
+          type="text"
           onKeyPress={handleOnKeyPress}
           value={text}
         ></input>
-        <button onClick={submitAnswer}>Listo!</button>
+        <div>
+          <button className="ready-btn" onClick={submitAnswer}>
+            Listo!
+          </button>
+        </div>
       </div>
     ) : (
       <span>Listo! esperemos al resto...</span>

@@ -8,6 +8,7 @@ import Historia from "./Historia";
 
 function Gameboard({ socket }) {
   const dispatch = useDispatch();
+  const { admin } = useSelector((state) => state);
 
   socket.on("getUsers", (response) =>
     dispatch({ type: "set_active_users", users: response })
@@ -36,15 +37,21 @@ function Gameboard({ socket }) {
     <div className="gameboard-container">
       <div className="board-wrapper">
         <header className="header">
-          <Historia socket={socket} />
+          <div className="header-box">
+            <Historia socket={socket} />
+          </div>
         </header>
         <div className="content">
           <div className="scores">
-            <button onClick={() => startGame()}>start</button>
-            <Scoreboard socket={socket} />
+            <div className="scores-box">
+              {admin && <button onClick={() => startGame()}>start</button>}
+              <Scoreboard socket={socket} />
+            </div>
           </div>
           <div className="gameboard">
-            <Mainboard socket={socket} />
+            <div className="gameboard-box">
+              <Mainboard socket={socket} />
+            </div>
           </div>
           <div className="chat">
             <Chatbox socket={socket} />

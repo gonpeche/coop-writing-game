@@ -35,7 +35,12 @@ const Chatbox = ({ socket }) => {
       <div className="chatbox">
         <ul className="chatbox-messages">
           {messages.map((message, i) => {
-            return <li key={i}>{message.text}</li>;
+            return (
+              <li key={i}>
+                <span>{message.user}: </span>
+                {message.text}
+              </li>
+            );
           })}
         </ul>
       </div>

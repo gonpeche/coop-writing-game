@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 function Scoreboard({}) {
   const { score, users } = useSelector((state) => state);
+  const dispatch = useDispatch();
   const [board, setBoard] = useState([]);
 
   useEffect(() => {
@@ -22,6 +23,8 @@ function Scoreboard({}) {
         userData.score = 0;
         updatedBoard.push(userData);
       }
+      score[user.name] === 10 &&
+        dispatch({ type: "set_winner", winner: user.name });
     });
     setBoard(updatedBoard);
   };

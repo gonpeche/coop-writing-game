@@ -1,16 +1,21 @@
 .gameboard-container {
   font-family: "Raleway", sans-serif;
   background-color: rgb(0, 0, 0);
+  border: 1px solid white;
   margin: 5%;
   min-width: 90vw;
   min-height: 90vh;
-  opacity: 0.91;
+  // opacity: 0.91;
 
   .board-wrapper {
     height: 100%;
 
     .header {
       height: 20%;
+      border-bottom: 1px solid white;
+      .header-box {
+        padding: 10px;
+      }
     }
 
     .content {
@@ -19,16 +24,21 @@
 
       .scores {
         min-width: 15%;
-        border: 1px solid red;
+        border-right: 1px solid white;
+        .scores-box {
+          padding: 5px;
+        }
       }
 
       .gameboard {
-        border: 1px solid blue;
         min-width: 65%;
+        .gameboard-box {
+          padding: 10px;
+        }
       }
 
       .chat {
-        border: 1px solid pink;
+        border-left: 1px solid white;
         min-width: 19%;
       }
     }

@@ -14,6 +14,7 @@ export const initialState = {
   selections: [],
   roundResults: [],
   text: "",
+  winner: "",
 };
 
 export const reducer = produce((draft = initialState, action) => {
@@ -45,6 +46,9 @@ export const reducer = produce((draft = initialState, action) => {
       return;
     case "start_game":
       draft.initGame = true;
+      return;
+    case "set_winner":
+      draft.winner = action.winner;
       return;
     case "next_round":
       draft.answers = [];
