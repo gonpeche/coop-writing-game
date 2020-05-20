@@ -48,7 +48,7 @@ const ChooseBox = ({ socket, nextRound }) => {
 
   const choseAnswer = () => (
     <div className="chooseContainer">
-      <h1>Elegí!</h1>
+      <h2>Elegí el texto que más te guste: </h2>
       {!done ? (
         <>
           <div className="choseBox">

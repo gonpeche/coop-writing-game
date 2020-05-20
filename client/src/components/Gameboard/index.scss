@@ -23,7 +23,7 @@
       display: flex;
 
       .scores {
-        min-width: 15%;
+        min-width: 20%;
         border-right: 1px solid white;
         .scores-box {
           padding: 5px;
@@ -31,7 +31,7 @@
       }
 
       .gameboard {
-        min-width: 65%;
+        min-width: 50%;
         .gameboard-box {
           padding: 10px;
         }
@@ -39,7 +39,7 @@
 
       .chat {
         border-left: 1px solid white;
-        min-width: 19%;
+        min-width: 30%;
       }
     }
   }

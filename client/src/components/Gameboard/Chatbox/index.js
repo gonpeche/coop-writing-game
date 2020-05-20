@@ -22,21 +22,26 @@ const Chatbox = ({ socket }) => {
     }
   };
 
-  return (
-    <div className="chatbox-container">
-      <div>
-        <div>Chatea con los participantes!</div>
-        <div>
-          {users.map((user, i) => (
-            <div key={i}>{user.name}</div>
-          ))}
+  const sideBar = () => (
+    <div>
+      <div className="top-box-online">Amigos online:</div>
+      {users.map((user, i) => (
+        <div key={i}>
+          {i + 1} - {user.name}
         </div>
-      </div>
+      ))}
+    </div>
+  );
+
+  const chatBox = () => (
+    <div>
       <div className="chatbox">
         {messages.map((message, i) => {
           return (
             <div key={i} className="chatbox-messages">
-              <span>{message.user}: </span>
+              <span>
+                <strong>{message.user}</strong>:{" "}
+              </span>
               {message.text}
             </div>
           );
@@ -58,6 +63,18 @@ const Chatbox = ({ socket }) => {
           ></input>
           <button type="submit">SEND</button>
         </form>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="chatbox-container">
+      <div className="top-box">
+        <div className="top-box-header">Chat</div>
+      </div>
+      <div className="bottom-box">
+        <div className="sidebar">{sideBar()}</div>
+        <div className="main-chatbox">{chatBox()}</div>
       </div>
     </div>
   );
