@@ -1,0 +1,27 @@
+.chat-wrapper {
+  height: 100%;
+  display: flex;
+  max-width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid red;
+  overflow: hidden;
+  font-size: 20px;
+
+  .chat-top {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .chat-bottom {
+    max-height: 500px;
+    overflow-y: scroll;
+    flex-grow: 2;
+    display: flex;
+    background-color: white;
+    color: black;
+    flex-direction: column-reverse;
+    border: 1px solid white;
+  }
+}

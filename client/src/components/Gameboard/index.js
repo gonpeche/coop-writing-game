@@ -38,7 +38,7 @@ function Gameboard({ socket }) {
       <div className="board-wrapper">
         <header className="header">
           <div className="header-box">
-            <Historia socket={socket} />
+            <Mainboard socket={socket} />
           </div>
         </header>
         <div className="content">
@@ -50,7 +50,7 @@ function Gameboard({ socket }) {
           </div>
           <div className="gameboard">
             <div className="gameboard-box">
-              <Mainboard socket={socket} />
+              <Historia socket={socket} />
             </div>
           </div>
           <div className="chat">
