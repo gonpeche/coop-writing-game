@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./index.scss";
 
+const MAX_CHARACTERS = 140;
+
 const InputAnswer = ({ socket }) => {
-  const { initGame, user } = useSelector((state) => state);
+  const { user } = useSelector((state) => state);
   const [answerSubmitted, setAnswerSubmitted] = useState(false);
   const [text, setText] = useState("");
   const dispatch = useDispatch();
@@ -22,40 +24,29 @@ const InputAnswer = ({ socket }) => {
     }
   };
 
-  const handleOnKeyPress = (event) =>
-    event.key === "Enter" ? submitAnswer() : null;
+  const textLength = () =>
+    MAX_CHARACTERS - text.length < 40 ? "red" : "green";
 
-  const renderActionPanel = () => {
-    return !answerSubmitted ? (
-      <div className="input-container">
-        <h4>Escribí: </h4>
-        <input
-          onChange={(e) => setText(e.target.value)}
-          className="input"
-          autoFocus
-          type="text"
-          onKeyPress={handleOnKeyPress}
-          value={text}
-        ></input>
-        <div>
-          <button className="ready-btn" onClick={submitAnswer}>
-            Listo!
-          </button>
-        </div>
+  return answerSubmitted ? (
+    "Esperemos al resto..."
+  ) : (
+    <div className="input-container">
+      <textarea
+        onChange={(e) => setText(e.target.value)}
+        autofocus
+        rows="4"
+        cols="80"
+        maxLength="140"
+        placeholder="Start typing your story..."
+        wrap="soft"
+      ></textarea>
+      <button onClick={submitAnswer}>Listo</button>
+      <div className="remaining">
+        <span>Remaining characters:</span>
+        <span className={textLength()}>
+          <strong>{MAX_CHARACTERS - text.length}</strong>
+        </span>
       </div>
-    ) : (
-      <span>Listo! esperemos al resto...</span>
-    );
-  };
-  return (
-    <div>
-      {initGame ? (
-        renderActionPanel()
-      ) : (
-        <div>
-          <h3>Wait of other players to join...</h3>
-        </div>
-      )}
     </div>
   );
 };

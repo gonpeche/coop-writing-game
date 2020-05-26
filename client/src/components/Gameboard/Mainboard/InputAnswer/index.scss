@@ -1,27 +1,42 @@
 .input-container {
-  margin-left: 5%;
-}
-.input {
-  width: 80%;
-  height: 30px;
-  padding: 10px;
-  font-size: 15px;
-  border-radius: 4px;
-}
+  align-items: center;
+  display: flex;
 
-.ready-btn {
-  margin-top: 30px;
-  height: 40px;
-  font-size: 20px;
-  margin-left: 25%;
-  // margin-left: 200px;
-  width: 200px;
-  cursor: pointer;
-  background-color: rgb(133, 228, 133);
-  color: black;
-}
+  .remaining {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
 
-.ready-btn:hover {
-  background-color: rgb(3, 109, 3);
-  color: white;
+    .green {
+      color: rgb(40, 230, 40);
+    }
+
+    .red {
+      color: red;
+    }
+  }
+  textarea {
+    font-size: 16px;
+    width: 400px;
+    vertical-align: baseline;
+    padding: 10px;
+    max-height: 100px;
+    max-width: 400px;
+    min-width: 400px;
+    min-height: 100px;
+  }
+  button {
+    font-size: 20px;
+    border-radius: 5px;
+    width: 70px;
+    height: 40px;
+    margin-left: 20px;
+  }
+
+  button:hover {
+    cursor: pointer;
+    background-color: rgb(89, 223, 89);
+  }
 }

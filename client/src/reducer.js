@@ -22,9 +22,10 @@ export const reducer = produce((draft = initialState, action) => {
     case "add_user":
       draft.user.name = action.name;
       draft.user.id = action.id;
-      if (action.name.toLowerCase() === "gon") {
-        draft.admin = true;
-      }
+      draft.admin = true;
+      // if (action.name.toLowerCase() === "gon") {
+      //   draft.admin = true;
+      // }
       return draft;
     case "set_active_users":
       draft.users = action.users;

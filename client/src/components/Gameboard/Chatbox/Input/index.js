@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import "./index.scss";
 
 const Input = ({ socket }) => {
   const [message, setMessage] = useState("");
   const sendMessage = (event) => {
     event.preventDefault();
-    console.log("message", message);
     if (message) {
       socket.emit("sendMessage", message, () => setMessage(""));
     }

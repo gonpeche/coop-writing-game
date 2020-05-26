@@ -7,7 +7,9 @@ import actions from "../../../actions";
 
 const Mainboard = ({ socket }) => {
   const [choseAnswers, setChoseAnswers] = useState(false);
-  const { users, answers, selections, score } = useSelector((state) => state);
+  const { users, answers, selections, score, initGame } = useSelector(
+    (state) => state
+  );
   const dispatch = useDispatch();
 
   socket.on("startNextRound", () => {
@@ -53,13 +55,17 @@ const Mainboard = ({ socket }) => {
     socket.emit("nextRound");
   };
   return (
-    <div>
+    <>
       {!choseAnswers ? (
-        <InputAnswer socket={socket} />
+        initGame ? (
+          <InputAnswer socket={socket} />
+        ) : (
+          "Waiting for other players to join..."
+        )
       ) : (
         <ChooseBox socket={socket} nextRound={nextRound} />
       )}
-    </div>
+    </>
   );
 };
 

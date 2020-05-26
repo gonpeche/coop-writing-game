@@ -8,7 +8,7 @@ const Messages = ({ messages }) => (
       <div>
         {messages.map((message, i) => {
           return (
-            <div key={i}>
+            <div key={i} className="chat-bottom-message">
               <span>
                 <strong>{message.user}</strong>:{" "}
               </span>

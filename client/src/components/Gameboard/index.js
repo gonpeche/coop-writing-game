@@ -37,9 +37,7 @@ function Gameboard({ socket }) {
     <div className="gameboard-container">
       <div className="board-wrapper">
         <header className="header">
-          <div className="header-box">
-            <Mainboard socket={socket} />
-          </div>
+          <Mainboard socket={socket} />
         </header>
         <div className="content">
           <div className="scores">

@@ -1,0 +1,11 @@
+.input-wrapper {
+  button {
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+  }
+}
