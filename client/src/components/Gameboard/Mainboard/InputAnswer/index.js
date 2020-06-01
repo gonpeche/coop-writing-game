@@ -33,7 +33,7 @@ const InputAnswer = ({ socket }) => {
     <div className="input-container">
       <textarea
         onChange={(e) => setText(e.target.value)}
-        autofocus
+        autoFocus
         rows="4"
         cols="80"
         maxLength="140"

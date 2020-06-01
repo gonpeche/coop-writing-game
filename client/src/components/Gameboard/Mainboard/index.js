@@ -63,7 +63,7 @@ const Mainboard = ({ socket }) => {
           "Waiting for other players to join..."
         )
       ) : (
-        <ChooseBox socket={socket} nextRound={nextRound} />
+        <ChooseBox socket={socket} nextRound={nextRound} /> // ESTO QUE SE VEA EN EL MODAL
       )}
     </>
   );
