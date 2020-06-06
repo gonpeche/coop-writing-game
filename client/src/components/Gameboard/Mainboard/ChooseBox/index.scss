@@ -1,6 +1,7 @@
 .chooseContainer {
-  margin-left: 10%;
-  margin-right: 10%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
 }
 
 .choseBox {
@@ -34,4 +35,14 @@
   cursor: pointer;
   background-color: rgb(133, 228, 133);
   color: black;
+}
+
+.Modal {
+  min-width: 500px;
+  min-height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #282c34;
 }

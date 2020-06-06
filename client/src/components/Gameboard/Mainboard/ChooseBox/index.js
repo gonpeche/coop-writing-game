@@ -11,25 +11,22 @@ Modal.setAppElement(document.getElementById("root"));
 const customStyles = {
   overlay: {
     zIndex: 2,
+    backgroundColor: "rgba(32, 29, 29, 0.75)",
   },
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
+  // content: {
+  //   top: "50%",
+  //   left: "50%",
+  //   right: "auto",
+  //   bottom: "auto",
+  //   marginRight: "-50%",
+  //   transform: "translate(-50%, -50%)",
+  // },
 };
 
 const ChooseBox = ({ socket, nextRound, openModal }) => {
   const { roundResults, selections } = useSelector((state) => state);
   const [showResults, setShowResults] = useState(false);
   const [results, setResults] = useState([]);
-
-  // const closeModal = () => {
-  //   setIsOpen(false);
-  // };
 
   useEffect(() => {
     if (roundResults?.votes) {
@@ -43,10 +40,9 @@ const ChooseBox = ({ socket, nextRound, openModal }) => {
     <div>
       <Modal
         isOpen={openModal}
-        // onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Example Modal"
         shouldCloseOnOverlayClick={false}
+        className="Modal"
       >
         {showResults ? (
           <RoundResults

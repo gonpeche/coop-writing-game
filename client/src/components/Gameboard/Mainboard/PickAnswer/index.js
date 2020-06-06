@@ -30,10 +30,10 @@ const PickAnswer = ({ socket }) => {
 
   return (
     <div className="chooseContainer">
-      <h2>Elegí el texto que más te guste: </h2>
       {!done ? (
         <>
           <div className="choseBox">
+            <h2>Elegí el texto que más te guste: </h2>
             <SelectAnswers handleSelect={handleSelect} />
           </div>
           <div className="submit-btn-wrapper">
