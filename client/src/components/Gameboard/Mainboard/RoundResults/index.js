@@ -1,20 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const RoundResults = ({ nextRound, setShowResults, results }) => {
   const { roundResults, selections, winner } = useSelector((state) => state);
-
-  const handleContinuar = () => {
-    setShowResults(false);
-    nextRound();
-  };
+  const [counter, setCounter] = useState(10);
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log("timer...");
-    }, 1000);
-    // console.log('')
-  }, []);
+    if (counter > 0) {
+      setTimeout(() => setCounter(counter - 1), 1000);
+    } else {
+      setShowResults(false);
+      nextRound();
+    }
+  }, [counter]);
 
   return (
     <div>
@@ -34,9 +32,7 @@ const RoundResults = ({ nextRound, setShowResults, results }) => {
           </p>
         );
       })}
-      <button className="submit-btn" onClick={handleContinuar}>
-        Continuar
-      </button>
+      <h2>Next round in: {counter}</h2>
     </div>
   );
 };
