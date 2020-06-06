@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import { calculateRoundResults } from "../utils";
 import PickAnswer from "../PickAnswer";
@@ -23,10 +22,14 @@ const customStyles = {
   },
 };
 
-const ChooseBox = ({ socket, nextRound }) => {
+const ChooseBox = ({ socket, nextRound, openModal }) => {
   const { roundResults, selections } = useSelector((state) => state);
   const [showResults, setShowResults] = useState(false);
   const [results, setResults] = useState([]);
+
+  // const closeModal = () => {
+  //   setIsOpen(false);
+  // };
 
   useEffect(() => {
     if (roundResults?.votes) {
@@ -38,15 +41,23 @@ const ChooseBox = ({ socket, nextRound }) => {
 
   return (
     <div>
-      {showResults ? (
-        <RoundResults
-          results={results}
-          nextRound={nextRound}
-          setShowResults={setShowResults}
-        />
-      ) : (
-        <PickAnswer socket={socket} />
-      )}
+      <Modal
+        isOpen={openModal}
+        // onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+        shouldCloseOnOverlayClick={false}
+      >
+        {showResults ? (
+          <RoundResults
+            results={results}
+            nextRound={nextRound}
+            setShowResults={setShowResults}
+          />
+        ) : (
+          <PickAnswer socket={socket} />
+        )}
+      </Modal>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const RoundResults = ({ nextRound, setShowResults, results }) => {
@@ -8,6 +8,13 @@ const RoundResults = ({ nextRound, setShowResults, results }) => {
     setShowResults(false);
     nextRound();
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("timer...");
+    }, 1000);
+    // console.log('')
+  }, []);
 
   return (
     <div>

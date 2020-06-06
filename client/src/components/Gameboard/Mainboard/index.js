@@ -7,6 +7,7 @@ import actions from "../../../actions";
 
 const Mainboard = ({ socket }) => {
   const [choseAnswers, setChoseAnswers] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const { users, answers, selections, score, initGame } = useSelector(
     (state) => state
   );
@@ -47,7 +48,10 @@ const Mainboard = ({ socket }) => {
     }
   }, [answers, selections]);
 
-  socket.on("startPicking", () => setChoseAnswers(true));
+  socket.on("startPicking", () => {
+    setOpenModal(true);
+    setChoseAnswers(true);
+  });
 
   const nextRound = () => {
     setChoseAnswers(false);
@@ -63,7 +67,11 @@ const Mainboard = ({ socket }) => {
           "Waiting for other players to join..."
         )
       ) : (
-        <ChooseBox socket={socket} nextRound={nextRound} /> // ESTO QUE SE VEA EN EL MODAL
+        <ChooseBox
+          socket={socket}
+          nextRound={nextRound}
+          openModal={openModal}
+        />
       )}
     </>
   );
