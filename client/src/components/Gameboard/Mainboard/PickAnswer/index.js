@@ -33,11 +33,11 @@ const PickAnswer = ({ socket }) => {
       {!done ? (
         <>
           <div className="choseBox">
-            <h2>Elegí el texto que más te guste: </h2>
+            <h2 className="choseBox-title">Elegí el texto que más te guste </h2>
             <SelectAnswers handleSelect={handleSelect} />
           </div>
-          <div className="submit-btn-wrapper">
-            <button className="submit-btn" onClick={() => submitSelection()}>
+          <div className="submit-button-wrapper">
+            <button className="submit-button" onClick={() => submitSelection()}>
               ACEPTAR
             </button>
           </div>

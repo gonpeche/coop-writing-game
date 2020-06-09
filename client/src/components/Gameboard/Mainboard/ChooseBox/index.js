@@ -13,14 +13,6 @@ const customStyles = {
     zIndex: 2,
     backgroundColor: "rgba(32, 29, 29, 0.75)",
   },
-  // content: {
-  //   top: "50%",
-  //   left: "50%",
-  //   right: "auto",
-  //   bottom: "auto",
-  //   marginRight: "-50%",
-  //   transform: "translate(-50%, -50%)",
-  // },
 };
 
 const ChooseBox = ({ socket, nextRound, openModal }) => {

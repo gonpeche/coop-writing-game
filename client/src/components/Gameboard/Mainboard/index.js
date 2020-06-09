@@ -64,7 +64,15 @@ const Mainboard = ({ socket }) => {
         initGame ? (
           <InputAnswer socket={socket} />
         ) : (
-          "Waiting for other players to join..."
+          <div>
+            <h4>Waiting for other players to join...</h4>
+            <p>
+              Friends online:
+              {users.map((user, i) => (
+                <span key={i}> {user.name} </span>
+              ))}
+            </p>
+          </div>
         )
       ) : (
         <ChooseBox

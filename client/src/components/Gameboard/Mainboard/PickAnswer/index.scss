@@ -1,3 +1,22 @@
-.chooseContainer {
-  height: 100%;
+.choseBox {
+  color: white;
+  &-title {
+    text-align: center;
+  }
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.submit-button-wrapper {
+  display: flex;
+  justify-content: center;
+  .submit-button {
+    margin-top: 30px;
+    height: 40px;
+    font-size: 20px;
+    width: 200px;
+    cursor: pointer;
+    background-color: rgb(133, 228, 133);
+    color: black;
+  }
 }
