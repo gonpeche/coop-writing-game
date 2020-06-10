@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import "./index.scss";
 
 const RoundResults = ({ nextRound, setShowResults, results }) => {
-  const { roundResults, selections, winner } = useSelector((state) => state);
+  const { roundResults, winner } = useSelector((state) => state);
   const [counter, setCounter] = useState(10);
 
   useEffect(() => {
@@ -15,32 +16,44 @@ const RoundResults = ({ nextRound, setShowResults, results }) => {
   }, [counter]);
 
   return (
-    <div>
+    <div className="roundResults-wrapper">
       {winner ? (
-        `GANO ${winner}`
+        <h1>GANO {winner.toUpperCase()}</h1>
       ) : (
         <>
-          <div>
+          <div className="roundResults-wrapper-header">
             {roundResults.ganador ? (
-              <h1>Ganó {results.ganador.author}!</h1>
+              <div>Ganó {results.ganador.author}!</div>
             ) : (
-              <h1>Empate! Suman 1 punto los votados</h1>
+              <div>
+                <strong className="author">¡Empate!</strong> Suman 1 punto los
+                que fueron votados:
+              </div>
             )}
           </div>
-          <h2>Votados: </h2>
-
-          {Object.entries(roundResults.result[0]).map(([key, value]) => (
-            <div>
-              <h4>"{key}"</h4>
-              <p>
-                Votado por:
-                {value["voters"].map((vote) => (
-                  <span>{vote} </span>
-                ))}
-              </p>
-            </div>
-          ))}
-          <h2>Next round in: {counter}</h2>
+          <div className="roundResults-wrapper-body">
+            {roundResults?.result &&
+              Object.entries(roundResults.result[0]).map(([key, value]) => (
+                <div className="roundResults-wrapper-answer">
+                  <div className="roundResults-wrapper-answer-top">"{key}"</div>
+                  <p>
+                    <strong>
+                      Escrito por{" "}
+                      <span className="author">
+                        {value.author.toUpperCase()}
+                      </span>{" "}
+                      y votado por:{" "}
+                    </strong>
+                    {value["voters"].map((vote) => (
+                      <span>{vote.toUpperCase()} </span>
+                    ))}
+                  </p>
+                </div>
+              ))}
+          </div>
+          <div className="roundResults-wrapper-footer">
+            <strong>NEXT ROUND IN {counter}</strong>
+          </div>
         </>
       )}
     </div>
