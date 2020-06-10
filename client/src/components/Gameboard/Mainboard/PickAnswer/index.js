@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SelectAnswers from "./SelectAnswers";
 import "./index.scss";
+import ok from "../../../../assets/ok.png";
 
 const PickAnswer = ({ socket }) => {
   const { answers, user } = useSelector((state) => state);
@@ -43,7 +44,10 @@ const PickAnswer = ({ socket }) => {
           </div>
         </>
       ) : (
-        <div>Esperando al resto...</div>
+        <div className="answer-submitted">
+          <img src={ok} />
+          <p>Waiting for the others to answer...</p>
+        </div>
       )}
     </div>
   );
