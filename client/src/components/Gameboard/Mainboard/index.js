@@ -8,7 +8,7 @@ import actions from "../../../actions";
 const Mainboard = ({ socket }) => {
   const [choseAnswers, setChoseAnswers] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const { users, answers, selections, score, initGame } = useSelector(
+  const { users, answers, selections, score, initGame, winner } = useSelector(
     (state) => state
   );
   const dispatch = useDispatch();
@@ -62,7 +62,11 @@ const Mainboard = ({ socket }) => {
     <>
       {!choseAnswers ? (
         initGame ? (
-          <InputAnswer socket={socket} />
+          winner ? (
+            <h1>GANÓ {winner}</h1>
+          ) : (
+            <InputAnswer socket={socket} />
+          )
         ) : (
           <div>
             <h4>Waiting for other players to join...</h4>

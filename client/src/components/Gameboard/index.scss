@@ -16,6 +16,7 @@
       justify-content: center;
       display: flex;
       align-items: center;
+      border: 2px solid rgb(89, 89, 214);
 
       .header-box {
         padding: 10px;
@@ -30,7 +31,8 @@
 
       .scores {
         width: 15%;
-        border: 5px solid blue;
+        border: 2px solid rgb(89, 89, 214);
+        text-align: center;
         .scores-box {
           padding: 5px;
         }
@@ -38,9 +40,11 @@
 
       .gameboard {
         width: 60%;
+        border: 2px solid rgb(89, 89, 214);
       }
 
       .chat {
+        border: 2px solid rgb(89, 89, 214);
         min-width: 25%;
         max-width: 300px;
       }

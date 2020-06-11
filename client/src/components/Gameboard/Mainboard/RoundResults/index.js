@@ -18,7 +18,9 @@ const RoundResults = ({ nextRound, setShowResults, results }) => {
   return (
     <div className="roundResults-wrapper">
       {winner ? (
-        <h1>GANO {winner.toUpperCase()}</h1>
+        <h1 className="winner-message">
+          GANO {winner.toUpperCase()} - Game ending in... {counter}
+        </h1>
       ) : (
         <>
           <div className="roundResults-wrapper-header">

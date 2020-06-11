@@ -1,6 +1,31 @@
 .select-answer {
   margin: 15px;
   font-size: 20px;
+  min-height: 0px;
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  overflow-y: scroll;
+
+  .answer {
+    padding: 15px;
+    text-align: center;
+    margin-right: 5px;
+    margin-top: 5px;
+    color: black;
+    border-radius: 23px;
+    border: 5px solid black;
+    background: #ffeac7;
+    cursor: pointer;
+  }
+
+  .answer:hover {
+    background-color: rgb(76, 216, 76);
+  }
+
+  .selected {
+    background-color: rgb(76, 216, 76);
+  }
 }
 
 .each-answer {

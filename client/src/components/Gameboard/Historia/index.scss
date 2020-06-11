@@ -1,0 +1,16 @@
+.historia {
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  max-height: 500px;
+
+  .texto {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 400px;
+  }
+  .rules {
+    text-align: center;
+  }
+}

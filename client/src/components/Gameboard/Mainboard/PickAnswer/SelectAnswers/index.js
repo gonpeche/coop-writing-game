@@ -16,7 +16,7 @@ const SelectAnswers = ({ handleSelect }) => {
       {answers.map((answer, i) => {
         if (answer.name !== user.name) {
           return (
-            <div key={i} className="each-answer">
+            <div key={i} className="answer">
               <input
                 type="radio"
                 value={answer.text}

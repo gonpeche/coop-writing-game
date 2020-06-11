@@ -30,7 +30,7 @@ const PickAnswer = ({ socket }) => {
   };
 
   return (
-    <div className="chooseContainer">
+    <div className="pick-answer-container">
       {!done ? (
         <>
           <div className="choseBox">

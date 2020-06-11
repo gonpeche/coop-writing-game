@@ -23,7 +23,7 @@ function Scoreboard({}) {
         userData.score = 0;
         updatedBoard.push(userData);
       }
-      score[user.name] === 25 &&
+      score[user.name] >= 5 &&
         dispatch({ type: "set_winner", winner: user.name });
     });
     setBoard(updatedBoard);
