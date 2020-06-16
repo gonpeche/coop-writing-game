@@ -1,23 +1,31 @@
-Juego
+# Welcome to your Coop Writing Game
 
-Para iniciar:
+Hi there. During COVID lockdown I decided to create a game to play with my friends. I haven't finished it yet, but most of the main functionality is done. Also, the UI is pretty basic, though my idea is to bring animations and other cools stuff later on.
 
-Ir a server --> correr `yarn dev`
+**IMPORTANT:** The game needs to be played with, at least, 3 players. The code still needs to cover edge cases if less than 3 players are online. If you want to peek around, open the game in 3 different tabs in your browser.
 
-To deploy to Heroku (the server), change package.json from nodemon server.js to node server.js
-To deploy to Netlify (the client), change:
-const ENDPOINT = "localhost:5000";
-to
-const ENDPOINT = "https://garralapala.herokuapp.com/";
+# Tech used
 
-TODO:
+**Frontend:** React, Redux
+**Backend:** Node, Express, SocketIO
 
-1. agrandar el texto donde va la historia - poner un scroll.
-2. poner los que faltan escribir
-3. hacer que con enter se agrande el input. Agrandr input. Que con Enter no se envíe.
-4. poner un timer.
-5. poner en resultados el 50 para llegar y ganar.
-6. arreglar el tablero del medio, que el texto agranda y pisa todo re petardo.
-7. Poder minimizar el chat y que haga un popup en cada mensaje
-8. Poner timer 20 segundos.
-9. poner quien todavía no respondió.
+Project deployment:
+
+- Frontend on **Netlify**: [https://hungry-borg-8fc13d.netlify.app/](https://hungry-borg-8fc13d.netlify.app/)
+- Backend on **Heroku**: [https://garralapala.herokuapp.com/](https://garralapala.herokuapp.com/)
+
+## Local setup
+
+Steps to run the project locally:
+
+> On **Client** directory, run `yarn`
+> On **Server** directory, run `yarn` and then `yarn dev` to start the game
+
+## TODO
+
+These are the things I still need to improve:
+
+1. If you already submitted an answer, show the players who haven't answered.
+2. Massively improve the UI, better background color for a soft reading and implement animations.
+3. Save the session on LocalStorage, so the data is not lost when the browser is refreshed.
+4. Create private rooms and a global score, with the top rated stories.

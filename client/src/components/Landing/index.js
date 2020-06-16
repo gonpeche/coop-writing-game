@@ -23,9 +23,9 @@ function Landing({ socket }) {
 
   return (
     <div className="welcome-landing">
-      <h1>hola k ace!?</h1>
+      <h1>Bienvenido</h1>
       <h1 style={{ color: "red" }}>{errorLogin}</h1>
-      <h2>komo t yamas?</h2>
+      <h2>¿Cual es tu nombre?</h2>
       <input
         type="text"
         autoFocus
