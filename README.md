@@ -7,11 +7,12 @@ Hi there. During COVID lockdown I decided to create a game to play with my frien
 # Tech used
 
 **Frontend:** React, Redux
+
 **Backend:** Node, Express, SocketIO
 
 Project deployment:
 
-- Frontend on **Netlify**: [https://hungry-borg-8fc13d.netlify.app/](https://hungry-borg-8fc13d.netlify.app/)
+- Frontend on **Netlify**: [https://keen-jones-1b313d.netlify.app/](https://keen-jones-1b313d.netlify.app/)
 - Backend on **Heroku**: [https://garralapala.herokuapp.com/](https://garralapala.herokuapp.com/)
 
 ## Local setup
@@ -19,6 +20,7 @@ Project deployment:
 Steps to run the project locally:
 
 > On **Client** directory, run `yarn`
+
 > On **Server** directory, run `yarn` and then `yarn dev` to start the game
 
 ## TODO
@@ -29,3 +31,4 @@ These are the things I still need to improve:
 2. Massively improve the UI, better background color for a soft reading and implement animations.
 3. Save the session on LocalStorage, so the data is not lost when the browser is refreshed.
 4. Create private rooms and a global score, with the top rated stories.
+5. Make it Responsive
